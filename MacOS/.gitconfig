@@ -1,0 +1,38 @@
+[user]
+    name = 
+    email = 
+[core]
+    preloadindex = true
+    fscache = true
+[alias]
+    co = checkout
+    up = "!f() { git fetch --prune; git pull; git submodule update --remote --recursive --init; }; f"
+    st = status
+    list = log --pretty=oneline --format='%h %an - %ar - %s'
+    tree = log --graph --abbrev-commit --pretty=oneline --decorate --date=relative --format=format:'%w(200,5,50)%C(bold blue)%h%C(reset) - %C(bold green)(%ar) %C(dim white)- %an - %C(reset)%C(white)%s%C(reset)' --all
+    undo = reset --hard
+    diffstat = diff --stat -r
+    changes = diff --name-status -r
+    cmt = "!f() { git add -A ; git commit -m \"$1\" ; }; f"
+    cob = "!f() { git checkout -b \"$1\"; }; f"
+    mg = merge --no-ff --no-edit
+    psh = push -u origin HEAD
+    delete = "!f() { git branch -d $(git branch); }; f"
+    remove = rm --cached
+    ignore = update-index --assume-unchanged
+[help]
+    autocorrect = 0
+[color]
+    ui = true
+[color "status"]
+    changed = yellow
+[gc]
+    auto = 256
+[push]
+    default = simple
+[merge]
+	tool = kdiff3
+[mergetool "kdiff3"]
+    cmd = /Applications/kdiff3.app/Contents/MacOS/kdiff3 \"$BASE\" \"$LOCAL\" \"$REMOTE\" -o \"$MERGED\" trustExitCode = true
+[difftool "kdiff3"]
+   cmd = /Applications/kdiff3.app/Contents/MacOS/kdiff3 \"$LOCAL\" \"$REMOTE\"
